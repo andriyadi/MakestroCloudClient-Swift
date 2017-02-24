@@ -1,6 +1,6 @@
 # Created by https://www.gitignore.io/api/osx,swift,carthage
 
-.vscode/
+.vscode
 
 ### OSX ###
 *.DS_Store
