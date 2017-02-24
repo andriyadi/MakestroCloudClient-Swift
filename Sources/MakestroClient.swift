@@ -18,9 +18,9 @@ import Jay
     }
 #endif
 
-typealias MakestroCloudSubscribedPropertyCallback = (Any, Any) -> Void
+public typealias MakestroCloudSubscribedPropertyCallback = (Any, Any) -> Void
 
-class MakestroClient: Aphid, MQTTDelegate {
+public class MakestroClient: Aphid, MQTTDelegate {
     
     public var isConnected: Bool = false
     
@@ -80,22 +80,22 @@ class MakestroClient: Aphid, MQTTDelegate {
     
     // MARK: MQTTDelegate methods
     
-    func didConnect() {
+    public func didConnect() {
         print("I connected! Now subscribing to \(mqttDefaultSubscribeTopic!)")
         isConnected = true
         subscribe(topic: [mqttDefaultSubscribeTopic], qoss: [QosType.atMostOnce])
     }
     
-    func didLoseConnection(error: Error?) {
+    public func didLoseConnection(error: Error?) {
         isConnected = false
         print("connection lost")
     }
     
-    func didCompleteDelivery(token: String) {
+    public func didCompleteDelivery(token: String) {
         print("Event: \(token)")
     }
     
-    func didReceiveMessage(topic: String, message: String) {
+    public func didReceiveMessage(topic: String, message: String) {
         //print(topic, message)
         
         let messageClean = message.replacingOccurrences(of: "\0\u{01}", with: "")
