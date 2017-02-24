@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io/api/osx,swift,carthage
 
+.vscode/
+
 ### OSX ###
 *.DS_Store
 .AppleDouble
