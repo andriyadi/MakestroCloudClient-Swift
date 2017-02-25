@@ -1,6 +1,7 @@
 import Foundation
 import Dispatch
 import MakestroClient
+import SwiftyGPIO
 
 #if os(Linux)
     import Glibc
@@ -12,6 +13,12 @@ let client = MakestroClient(project: "[YOUR_PROJECT_NAME]",
                             userName: "[YOUR_USER_NAME]",
                             userKey: "[YOUR_USER_KEY]",
                             deviceId: "[YOUR_DEVICE_ID]")
+
+#if os(Linux)
+let gpios = SwiftyGPIO.GPIOs(for: .RaspberryPi2)
+var ledGpio = gpios[.P18]!
+ledGpio.direction = .OUT
+#endif
 
 print("" +
     "       \\(:)/\n" +
@@ -37,6 +44,7 @@ do {
         print("Got data!!! -> \(prop) is \(val)")
         
         #if os(Linux)
+            //If on Raspberry Pi (OS is Linux), turn on/off LED
             if prop as! String == "button" {
                 ledGpio.value = Int(val as! UInt)
             }
